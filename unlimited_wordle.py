@@ -7,9 +7,9 @@ allowed_attempts = 6
 word_length = 5
 word_bank = [word.upper() for word in brown.words() if len(word) ==word_length and word.isalpha()]
 
-def validate(guess, answer, current_dict):
+def validate(attempt, answer, current_dict):
     result = ''
-    for pos, char in enumerate(guess): # Iterates over entry to check if letter is correct
+    for pos, char in enumerate(attempt): # Iterates over entry to check if letter is correct
         if char == list(answer)[pos]: # Letter is correct and in right position
             result += (' ' + colored(char, 'green') + ' ')
             current_dict = current_dict.replace(char, (colored(char, 'green')))
@@ -28,15 +28,15 @@ def guess(answer):
     for i in range(allowed_attempts): # Iterates over 6 attempts
         while True:
             print(dict_words)
-            guess = input('Attempt #' + str(i + 1) + ': ').upper() # Takes user input
-            if len(guess) == word_length and guess in word_bank: # Ensures user input is valid
+            attempt = input('Attempt #' + str(i + 1) + ': ').upper() # Takes user input
+            if len(attempt) == word_length and attempt in word_bank: # Ensures user input is valid
                 break
             else:
                 print(colored('\nNot in word bank.', 'red'))
-        if guess == answer: # Checks if user won
+        if attempt == answer: # Checks if user won
             return True
         else:
-            dict_words = validate(guess, answer, dict_words) # Calls validation function
+            dict_words = validate(attempt, answer, dict_words) # Calls validation function
     return False
     
 def main():
