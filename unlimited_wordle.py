@@ -20,7 +20,7 @@ def validate(attempt, answer, current_alpha):
         elif char in answer: # Letter is correct but in wrong position
             color = 'yellow'
         else: # Letter is incorrect
-            color = 'white'
+            color = 'red'
         current_alpha = current_alpha.replace(char, colored(char, color))
         result += (' ' + colored(char, color) + ' ')
     print('\n' + result + '\n')
